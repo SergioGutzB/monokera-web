@@ -25,36 +25,41 @@ export enum PolicyStatus {
   expired,
 }
 
+export enum DocumentType {
+  DNI = "DNI",
+  Passport = "Passport",
+  CC = "CC",
+  Nit = "Nit",
+}
+
 export interface PolicyHolder {
   id: number;
   first_name: string;
-  middle_name: null;
+  middle_name: string | undefined;
   last_name: string;
-  second_last_name: null;
+  second_last_name: string | undefined;
   document_number: string;
-  document_type: string;
+  document_type: DocumentType;
   email: string;
   phone: string;
-  policy_id: number;
-  created_at: Date;
-  updated_at: Date;
 }
 
-export interface PolicyInsured {}
+export interface PolicyInsured {
+  id: number;
+  name: string;
+}
 
 export interface PolicyCoverage {
   id: number;
   name: string;
-  insured_value?: string;
-  policy_id: number;
-  created_at: Date;
-  updated_at: Date;
+  insured_value: string;
 }
 
 export interface Policy {
-  effective_from: Date;
-  effective_until: Date;
-  status: PolicyStatus;
+  id: number;
+  effective_from: Date | string;
+  effective_until: Date | string;
+  status: PolicyStatus | string;
   number: string;
   insureds: PolicyInsured[];
   coverages: PolicyCoverage[];
