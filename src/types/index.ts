@@ -1,3 +1,19 @@
+import type { NextPage } from 'next';
+import type { AppProps } from 'next/app';
+import type { ReactNode } from 'react';
+
+export type NextPageWithLayout = NextPage & {
+  getLayout?: () => ReactNode;
+};
+
+export type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+export type ChildrenProps = {
+  children: ReactNode;
+};
+
 export interface PaginatorProps {
   totalPages: number;
   currentPage: number;
@@ -26,10 +42,10 @@ export enum PolicyStatus {
 }
 
 export enum DocumentType {
-  DNI = "DNI",
-  Passport = "Passport",
-  CC = "CC",
-  Nit = "Nit",
+  DNI = 'DNI',
+  Passport = 'Passport',
+  CC = 'CC',
+  Nit = 'Nit',
 }
 
 export interface PolicyHolder {
