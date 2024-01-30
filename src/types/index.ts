@@ -14,10 +14,12 @@ export type ChildrenProps = {
   children: ReactNode;
 };
 
-export interface PaginatorProps {
+export interface PaginationProps {
   totalPages: number;
   currentPage: number;
-  onPageChange: (pageNumber: number) => void;
+  nextPage: number | null;
+  prevPage: number | null;
+  onPageChange?: (page: number) => void;
 }
 
 export interface PolicyListProps {
@@ -80,4 +82,13 @@ export interface Policy {
   insureds: PolicyInsured[];
   coverages: PolicyCoverage[];
   holder: PolicyHolder;
+}
+
+export interface Paginated {
+  items: number;
+  next: number | null;
+  page: number;
+  prev: number | null;
+  total_items: number;
+  total_pages: number;
 }
