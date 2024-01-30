@@ -1,5 +1,6 @@
+"use client";
 import { Policy } from "@/types";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export interface PolicyListProps {
