@@ -1,14 +1,15 @@
-import PolicyList from "@/components/PolicyList";
-import generateMockPolicy from "@/utils/generateMockPolicy";
-import Link from "next/link";
+import PolicyList from '@/components/PolicyList';
+import MainLayout from '@/layouts/MainLayout/MainLayout';
+import generateMockPolicy from '@/utils/generateMockPolicy';
+import Link from 'next/link';
 
 export default function Home() {
   const policies = Array.from({ length: 5 }, () => generateMockPolicy());
   return (
-    <div>
+    <MainLayout>
       <h1>Home</h1>
       <Link href="/about">About</Link>
       <PolicyList policies={policies} />
-    </div>
+    </MainLayout>
   );
 }
