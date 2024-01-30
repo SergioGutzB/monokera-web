@@ -1,10 +1,10 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import PolicyList, { PolicyListProps } from "../src/components/PolicyList";
-import PolicyMock from "@/mocks/policy";
-import { useRouter } from "next/router";
+import { fireEvent, render, screen } from '@testing-library/react';
+import PolicyList, { PolicyListProps } from '../src/components/PolicyList';
+import PolicyMock from '@/mocks/policy';
+import { useRouter } from 'next/navigation';
 
-jest.mock("next/router", () => ({
-  ...jest.requireActual("next/router"),
+jest.mock('next/navigation', () => ({
+  ...jest.requireActual('next/navigation'),
   useRouter: jest.fn(),
 }));
 
@@ -21,24 +21,24 @@ const renderPolicyList = (props?: Partial<PolicyListProps>) => {
   return render(<PolicyList {...defaultProps} {...props} />);
 };
 
-test("renders policy list", () => {
+test('renders policy list', () => {
   renderPolicyList();
-  const policyItems = screen.getAllByTestId("policy-item");
+  const policyItems = screen.getAllByTestId('policy-item');
   expect(policyItems).toHaveLength(mockPolicies.length);
 });
 
-test("renders policy list with correct values", () => {
+test('renders policy list with correct values', () => {
   renderPolicyList();
 
-  const policyItems = screen.getAllByTestId("policy-item");
+  const policyItems = screen.getAllByTestId('policy-item');
 
   policyItems.forEach((_policyItem, index) => {
     const policyNumberElement = screen.getByTestId(`policy-number-${index}`);
     const policyEffectiveFromElement = screen.getByTestId(
-      `policy-effective-from-${index}`,
+      `policy-effective-from-${index}`
     );
     const policyEffectiveUntilElement = screen.getByTestId(
-      `policy-effective-until-${index}`,
+      `policy-effective-until-${index}`
     );
     const policyStatusElement = screen.getByTestId(`policy-status-${index}`);
 
@@ -48,16 +48,16 @@ test("renders policy list with correct values", () => {
     expect(policyStatusElement).toBeInTheDocument();
 
     expect(policyNumberElement).toHaveTextContent(
-      `Policy Number: ${mockPolicies[index].number}`,
+      `Policy Number: ${mockPolicies[index].number}`
     );
     expect(policyEffectiveFromElement).toHaveTextContent(
-      `Effective From: ${mockPolicies[index].effective_from}`,
+      `Effective From: ${mockPolicies[index].effective_from}`
     );
     expect(policyEffectiveUntilElement).toHaveTextContent(
-      `Effective Until: ${mockPolicies[index].effective_until}`,
+      `Effective Until: ${mockPolicies[index].effective_until}`
     );
     expect(policyStatusElement).toHaveTextContent(
-      `Status: ${mockPolicies[index].status}`,
+      `Status: ${mockPolicies[index].status}`
     );
   });
 });
@@ -71,7 +71,7 @@ test('renders policy list with "policy-show-btn" that redirects to /policy/:poli
 
   renderPolicyList();
 
-  const policyShowBtn = screen.getByTestId("policy-show-btn-1");
+  const policyShowBtn = screen.getByTestId('policy-show-btn-1');
 
   expect(policyShowBtn).toBeInTheDocument();
 
