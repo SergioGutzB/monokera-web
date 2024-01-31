@@ -1,16 +1,8 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import PolicyList, { PolicyListProps } from '../src/components/PolicyList';
 import PolicyMock from '@/mocks/policy';
-import { useRouter } from 'next/navigation';
-
-jest.mock('next/navigation', () => ({
-  ...jest.requireActual('next/navigation'),
-  useRouter: jest.fn(),
-}));
-
-const mockRouter = {
-  push: jest.fn(),
-};
+import formatDateUTC from '@/utils/formatDate';
+import React from 'react';
 
 const mockPolicies = PolicyMock(5);
 
@@ -23,16 +15,16 @@ const renderPolicyList = (props?: Partial<PolicyListProps>) => {
 
 test('renders policy list', () => {
   renderPolicyList();
-  const policyItems = screen.getAllByTestId('policy-item');
-  expect(policyItems).toHaveLength(mockPolicies.length);
+  const policyRow = screen.getAllByRole('policy-row');
+  expect(policyRow).toHaveLength(mockPolicies.length);
 });
 
 test('renders policy list with correct values', () => {
   renderPolicyList();
 
-  const policyItems = screen.getAllByTestId('policy-item');
+  const policyRow = screen.getAllByRole('policy-row');
 
-  policyItems.forEach((_policyItem, index) => {
+  policyRow.forEach((_policyItem, index) => {
     const policyNumberElement = screen.getByTestId(`policy-number-${index}`);
     const policyEffectiveFromElement = screen.getByTestId(`policy-effective-from-${index}`);
     const policyEffectiveUntilElement = screen.getByTestId(`policy-effective-until-${index}`);
@@ -43,28 +35,25 @@ test('renders policy list with correct values', () => {
     expect(policyEffectiveUntilElement).toBeInTheDocument();
     expect(policyStatusElement).toBeInTheDocument();
 
-    expect(policyNumberElement).toHaveTextContent(`Policy Number: ${mockPolicies[index].number}`);
-    expect(policyEffectiveFromElement).toHaveTextContent(`Effective From: ${mockPolicies[index].effective_from}`);
-    expect(policyEffectiveUntilElement).toHaveTextContent(`Effective Until: ${mockPolicies[index].effective_until}`);
-    expect(policyStatusElement).toHaveTextContent(`Status: ${mockPolicies[index].status}`);
+    expect(policyNumberElement).toHaveTextContent(`${mockPolicies[index].number}`);
+    expect(policyEffectiveFromElement).toHaveTextContent(formatDateUTC(mockPolicies[index].effective_from));
+    expect(policyEffectiveUntilElement).toHaveTextContent(formatDateUTC(mockPolicies[index].effective_until));
+    expect(policyStatusElement).toHaveTextContent(`${mockPolicies[index].status}`);
   });
 });
 
-beforeEach(() => {
-  (useRouter as jest.Mock).mockReturnValue(mockRouter);
-});
-
-test('renders policy list with "policy-show-btn" that redirects to /policy/:policyNumber', () => {
-  (useRouter as jest.Mock).mockReturnValue(mockRouter);
-
+test('renders policy list with "policy-show-btn" that redirects to /policy/:policyNumber', async () => {
   renderPolicyList();
 
-  const policyShowBtn = screen.getByTestId('policy-show-btn-1');
+  const policyShowBtn = screen.getByTestId('policy-show-btn-0');
 
+  // verificamos que
   expect(policyShowBtn).toBeInTheDocument();
 
-  fireEvent.click(policyShowBtn);
+  // verificamos atributos aria-label 'Details for policy number '
+  expect(policyShowBtn).toHaveAttribute('aria-label', `Details for policy number ${mockPolicies[0].number}`);
+  expect(policyShowBtn).toHaveAttribute('href', `/policy/${mockPolicies[0].number}`);
 
-  const expectedPath = `policy/${mockPolicies[1].number}`;
-  expect(mockRouter.push).toHaveBeenCalledWith(expectedPath);
+  // await userEvent.click(policyShowBtn);
+  // await waitFor(() => expect(screen.getByText(`Policy Details - ${mockPolicies[0].number}`)));
 });

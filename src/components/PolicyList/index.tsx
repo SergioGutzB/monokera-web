@@ -11,7 +11,7 @@ export interface PolicyListProps {
 const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
   return (
     <div>
-      <div className="bg-white p-4 rounded-md shadow-md flex flex-col justify-between" data-testid="policy-item">
+      <div className="bg-white p-4 rounded-md shadow-md flex flex-col justify-between">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
@@ -32,19 +32,20 @@ const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
           </thead>
           <tbody>
             {policies.map((policy, index) => (
-              <tr className={`${index % 2 ? 'bg-white' : 'bg-gray-50'} border-b`} key={`policy-${policy.number}`}>
+              <tr
+                className={`policy-item ${index % 2 ? 'bg-white' : 'bg-gray-50'} border-b`}
+                key={`policy-${policy.number}`}
+                data-testid={`policy-item-${index} policy-item`}
+                role="policy-row"
+              >
                 <td
                   scope="row"
                   className="px-6 py-3 font-medium text-gray-700 whitespace-nowrap uppercase"
-                  data-testid={`policy-number--${index}`}
+                  data-testid={`policy-number-${index}`}
                 >
                   {policy.number}
                 </td>
-                <td
-                  scope="row"
-                  className="px-4 py-3 hidden md:table-cell"
-                  data-testid={`policy-status-${index} camelcase`}
-                >
+                <td scope="row" className="px-4 py-3 hidden md:table-cell" data-testid={`policy-status-${index}`}>
                   <div className="flex items-center first-line:uppercase">
                     <span
                       className={`h-2.5 w-2.5 rounded-full me-2 ${getColorStatusClass(policy.status)}`}
@@ -79,6 +80,7 @@ const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
                       data-modal-show="policy-details"
                       className="font-medium text-purple-400 hover:underline"
                       aria-label={`Details for policy number ${policy.number}`}
+                      data-testid={`policy-show-btn-${index}`}
                     >
                       Details
                     </a>
