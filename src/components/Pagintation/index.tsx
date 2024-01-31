@@ -23,8 +23,9 @@ const Pagination: React.FC<PaginationProps> = ({
       return range(1, totalPages).map(page => (
         <button
           key={page}
-          className={`mx-1 px-3 py-1 border ${currentPage === page ? 'bg-gray-300' : ''}`}
+          className={`mx-1 px-3 py-1  text-gray-600 rounded-full ${currentPage === page ? 'bg-purple-50' : ''}`}
           onClick={() => handlePageChange(page)}
+          aria-label={`Go to page ${page}`}
         >
           {page}
         </button>
@@ -39,8 +40,9 @@ const Pagination: React.FC<PaginationProps> = ({
       pages.push(
         <button
           key={1}
-          className="mx-1 px-3 py-1 border"
+          className="mx-1 px-3 py-1  text-gray-600"
           onClick={() => handlePageChange(1)}
+          aria-label={`Go to page 1`}
         >
           1
         </button>,
@@ -52,8 +54,9 @@ const Pagination: React.FC<PaginationProps> = ({
       ...range(start, end).map(page => (
         <button
           key={page}
-          className={`mx-1 px-3 py-1 border ${currentPage === page ? 'bg-gray-300' : ''}`}
+          className={`mx-1 px-3 py-1  text-gray-600  rounded-full ${currentPage === page ? 'bg-purple-50' : ''}`}
           onClick={() => handlePageChange(page)}
+          aria-label={`Go to page ${page}`}
         >
           {page}
         </button>
@@ -65,8 +68,9 @@ const Pagination: React.FC<PaginationProps> = ({
         <span key="ellipsis2">...</span>,
         <button
           key={totalPages}
-          className="mx-1 px-3 py-1 border"
+          className="mx-1 px-3 py-1  text-gray-600"
           onClick={() => handlePageChange(totalPages)}
+          aria-label={`Go to page ${totalPages}`}
         >
           {totalPages}
         </button>
@@ -77,25 +81,33 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <div className="flex items-center justify-center my-4">
+    <nav
+      aria-label="Pagination"
+      className="flex items-center justify-center my-4"
+    >
       <button
-        className="mx-1 px-3 py-1 border"
+        tabIndex={currentPage === 1 ? -1 : 0}
+        className="mx-1 px-3 py-1  focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-35 text-gray-600"
         disabled={currentPage === 1}
         onClick={() => handlePageChange(prevPage)}
+        aria-label={`Go to previous page ${prevPage}`}
       >
         {'<'}
       </button>
-
-      {renderPages()}
+      <ul className="flex list-none" role="list">
+        {renderPages()}
+      </ul>
 
       <button
-        className="mx-1 px-3 py-1 border"
+        tabIndex={currentPage === totalPages ? -1 : 0}
+        className="mx-1 px-3 py-1  focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-35 text-gray-600"
         disabled={currentPage === totalPages}
         onClick={() => handlePageChange(nextPage)}
+        aria-label={`Go to next page ${nextPage}`}
       >
         {'>'}
       </button>
-    </div>
+    </nav>
   );
 };
 

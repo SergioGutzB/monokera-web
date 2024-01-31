@@ -37,40 +37,46 @@ const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
                 className={`${index % 2 ? 'bg-white' : 'bg-gray-50'} border-b`}
                 key={policy.id}
               >
-                <th
+                <td
                   scope="row"
                   className="px-6 py-3 font-medium text-gray-700 whitespace-nowrap uppercase"
                   data-testid={`policy-number--${index}`}
                 >
                   {policy.number}
-                </th>
+                </td>
                 <td
+                  scope="row"
                   className="px-4 py-3"
                   data-testid={`policy-status-${index} camelcase`}
                 >
                   <div className="flex items-center first-line:uppercase">
-                    <div
+                    <span
                       className={`h-2.5 w-2.5 rounded-full me-2 ${getColorStatusClass(policy.status)}`}
                       style={{
                         backgroundColor: getColorStatusStyle(policy.status),
                       }}
-                    ></div>{' '}
+                      aria-label={`Policy number {policy.number} with status ${policy.status}`}
+                    ></span>{' '}
                     {policy.status}
                   </div>
                 </td>
                 <td
+                  scope="row"
                   className="px-6 py-3"
                   data-testid={`policy-effective-from-${index}`}
+                  aria-labelledby={`policy-effective-from-${index}`}
                 >
                   {policy.effective_from.toString()}
                 </td>
                 <td
+                  scope="row"
                   className="px-6 py-3"
                   data-testid={`policy-effective-until-${index}`}
+                  aria-labelledby={`policy-effective-until-${index}`}
                 >
                   {policy.effective_until.toString()}
                 </td>
-                <td className="px-3 py-3">
+                <td className="px-3 py-3" scope="row">
                   <Link
                     passHref
                     href={`/policy/${policy.number}`}
@@ -80,6 +86,7 @@ const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
                       type="button"
                       data-modal-show="policy-details"
                       className="font-medium text-purple-400 hover:underline"
+                      aria-label={`Details for policy number ${policy.number}`}
                     >
                       Details
                     </a>
