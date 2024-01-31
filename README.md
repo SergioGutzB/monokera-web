@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Monokera WebTest - FullStack
 
-## Getting Started
+## Description
 
-First, run the development server:
+This is a FullStack project using Next.js 14 with app routing.
+
+## Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ tree "monokera-web"
+monokera-web
+├── app
+│ ├── policy
+│ │ ├── [number]
+│ │ └── layout
+│ └── page.tsx
+├── components
+│ ├── Pagination
+│ ├── Policies
+│ ├── PolicySearch
+│ └── PolicyList
+├── mocks (Test mocks)
+├── types (Types and interfaces)
+├── utils (Function utils)
+└── config (Constants)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Monokera WebTest - FullStack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Description
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This is a FullStack project using Next.js 14 with app routing.
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+## Local Development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Make sure to create a `.env` file. You can use `.env.example` as a template.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Backend Project:
 
-## Deploy on Vercel
+   - Run the backend project (`sg-policy-service`) on port `3000` `locahost:3000` by default.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Web Project:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   - Create `.env` file or copy from `.env.example` file to setup environment variables.
+
+   - Run the web project on port 3001 using the following commands:
+
+     ```bash
+     npm install
+
+     npm run dev
+     # or
+     turbo dev
+     ```
+
+   - Access the project at `http://localhost:3001`.
+
+## Running Tests
+
+Execute the following command to run tests:
+
+```bash
+npm run test
+```
+
+### Tests include:
+
+- ./**tests**/pagination.test.tsx
+- ./**tests**/policyList.test.tsx
+- ./**tests**/policyDetails.test.tsx
