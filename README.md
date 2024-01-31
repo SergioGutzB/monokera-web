@@ -18,22 +18,14 @@ monokera-web
 │ ├── Pagination
 │ ├── Policies
 │ ├── PolicySearch
-│ └── PolicyList
+
 ├── mocks (Test mocks)
 ├── types (Types and interfaces)
 ├── utils (Function utils)
 └── config (Constants)
 ```
 
-# Monokera WebTest - FullStack
-
-## Description
-
-This is a FullStack project using Next.js 14 with app routing.
-
-## Project Structure
-
-## Local Development
+## Local Development and Run Local
 
 Make sure to create a `.env` file. You can use `.env.example` as a template.
 
@@ -70,3 +62,12 @@ npm run test
 - ./**tests**/pagination.test.tsx
 - ./**tests**/policyList.test.tsx
 - ./**tests**/policyDetails.test.tsx
+
+
+## Future Improvements
+
+Here are some potential improvements for the project:
+
+- Implement responsive styling for better adaptability to various screen sizes.
+- Enhance security and flexibility by reading environment variables for configuration.
+
