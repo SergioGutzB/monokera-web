@@ -27,8 +27,15 @@ async function PolicyDetails({ params }: { params: { number: string } }) {
 
   return (
     <div className="bg-white rounded-lg my-10 px-4 md:px-10 lg:px-20 mx-auto">
-      <Link href="/" data-testid="back-btn">
-        {'<-'} Go Back
+      <Link href="/" data-testid="back-btn" passHref legacyBehavior>
+        <a
+          type="button"
+          data-modal-show="go-to-back"
+          className="font-medium text-gray-400 hover:text-gray-500"
+          aria-label={`Go to back`}
+        >
+          {'<-'} Go Back
+        </a>
       </Link>
       <h1
         className="text-4xl font-bold mb-10 mt-10 text-gray-600"
