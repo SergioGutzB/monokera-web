@@ -32,11 +32,7 @@ const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
           </thead>
           <tbody>
             {policies.map((policy, index) => (
-              <tr
-                className={`${index % 2 ? 'bg-white' : 'bg-gray-50'} border-b`}
-                key={policy.id}
-                key={`policy-${policy.number}`}
-              >
+              <tr className={`${index % 2 ? 'bg-white' : 'bg-gray-50'} border-b`} key={`policy-${policy.number}`}>
                 <td
                   scope="row"
                   className="px-6 py-3 font-medium text-gray-700 whitespace-nowrap uppercase"
@@ -98,4 +94,3 @@ const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
 };
 
 export default PolicyList;
-

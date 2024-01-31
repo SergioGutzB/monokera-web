@@ -34,12 +34,8 @@ test('renders policy list with correct values', () => {
 
   policyItems.forEach((_policyItem, index) => {
     const policyNumberElement = screen.getByTestId(`policy-number-${index}`);
-    const policyEffectiveFromElement = screen.getByTestId(
-      `policy-effective-from-${index}`
-    );
-    const policyEffectiveUntilElement = screen.getByTestId(
-      `policy-effective-until-${index}`
-    );
+    const policyEffectiveFromElement = screen.getByTestId(`policy-effective-from-${index}`);
+    const policyEffectiveUntilElement = screen.getByTestId(`policy-effective-until-${index}`);
     const policyStatusElement = screen.getByTestId(`policy-status-${index}`);
 
     expect(policyNumberElement).toBeInTheDocument();
@@ -47,18 +43,10 @@ test('renders policy list with correct values', () => {
     expect(policyEffectiveUntilElement).toBeInTheDocument();
     expect(policyStatusElement).toBeInTheDocument();
 
-    expect(policyNumberElement).toHaveTextContent(
-      `Policy Number: ${mockPolicies[index].number}`
-    );
-    expect(policyEffectiveFromElement).toHaveTextContent(
-      `Effective From: ${mockPolicies[index].effective_from}`
-    );
-    expect(policyEffectiveUntilElement).toHaveTextContent(
-      `Effective Until: ${mockPolicies[index].effective_until}`
-    );
-    expect(policyStatusElement).toHaveTextContent(
-      `Status: ${mockPolicies[index].status}`
-    );
+    expect(policyNumberElement).toHaveTextContent(`Policy Number: ${mockPolicies[index].number}`);
+    expect(policyEffectiveFromElement).toHaveTextContent(`Effective From: ${mockPolicies[index].effective_from}`);
+    expect(policyEffectiveUntilElement).toHaveTextContent(`Effective Until: ${mockPolicies[index].effective_until}`);
+    expect(policyStatusElement).toHaveTextContent(`Status: ${mockPolicies[index].status}`);
   });
 });
 

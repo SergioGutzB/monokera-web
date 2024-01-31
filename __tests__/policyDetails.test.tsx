@@ -40,13 +40,9 @@ test('renders policy details correctly', async () => {
   await waitFor(() => {});
 
   // Check if policy details are rendered correctly
+  expect(screen.getByText(`Policy Details - ${(mockPolicyData.number as string).toUpperCase()}`)).toBeInTheDocument();
   expect(
-    screen.getByText(`Detalle de Póliza ${mockPolicyData.number}`)
-  ).toBeInTheDocument();
-  expect(
-    screen.getByText(
-      `${mockPolicyData.holder.first_name} ${mockPolicyData.holder.last_name}`
-    )
+    screen.getByText(`${mockPolicyData.holder.first_name} ${mockPolicyData.holder.last_name}`)
   ).toBeInTheDocument();
 
   // Check if insureds are rendered
@@ -56,22 +52,18 @@ test('renders policy details correctly', async () => {
 
   // Check if coverages are rendered
   mockPolicyData.coverages.forEach((coverage: PolicyCoverage) => {
-    expect(
-      screen.getByText(
-        `${coverage.name} - Valor Insurado: $${coverage.insured_value}`
-      )
-    ).toBeInTheDocument();
+    expect(screen.getByText(`${coverage.name} - Insured Value:`)).toBeInTheDocument();
   });
 });
 
-test('renders "Ir Atrás" button', async () => {
+test('renders "Go back" button', async () => {
   (useRouter as jest.Mock).mockReturnValue(mockRouter);
   render(await PolicyDetails({ params: { number: mockPolicyData.number } }));
 
   // Wait for loading to complete
   await waitFor(() => {});
 
-  // Check if "Ir Atrás" button is rendered
+  // Check if "Go Back" button is rendered
   const goBackButton = screen.getByTestId('back-btn');
   expect(goBackButton).toBeInTheDocument();
 
