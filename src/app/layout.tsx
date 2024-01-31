@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: ChildrenProps) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        {children}
+      <body className={`${inter.className} flex flex-col min-h-screen`}>
+        <div className="flex-grow">{children}</div>
         <MainFooter />
       </body>
     </html>

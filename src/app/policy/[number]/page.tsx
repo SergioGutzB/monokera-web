@@ -23,50 +23,67 @@ async function PolicyDetails({ params }: { params: { number: string } }) {
     return <div>Loading Details...</div>;
   }
 
+  const sectionClass = 'mb-10';
+
   return (
-    <div className="container mx-auto p-4">
+    <div className="bg-white rounded-lg my-10 px-4 md:px-10 lg:px-20 mx-auto">
       <Link href="/" data-testid="back-btn">
-        Ir Atrás
+        {'<-'} Go Back
       </Link>
-      <h1 className="text-2xl font-bold mb-4">
-        Detalle de Póliza {policyNumber}
+      <h1
+        className="text-4xl font-bold mb-10 mt-10 text-gray-600"
+        aria-label={`Policy Details ${policyNumber}`}
+      >
+        Policy Details - {policyNumber.toUpperCase()}
       </h1>
 
-      <section className="mb-4">
-        <h2 className="text-xl font-semibold mb-2">Tomador</h2>
-        <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <dt>Nombre Completo:</dt>
-          <dd>{`${policy.holder.first_name} ${policy.holder.last_name}`}</dd>
-          <dt>Documento:</dt>
-          <dd>{policy.holder.document_number}</dd>
-          <dt>Tipo de Documento:</dt>
-          <dd>{policy.holder.document_type}</dd>
-          <dt>Email:</dt>
-          <dd>{policy.holder.email}</dd>
-          <dt>Teléfono:</dt>
-          <dd>{policy.holder.phone}</dd>
-        </dl>
-      </section>
+      <div className="mb-4 grid md:grid-cols-2 grid-cols-1 justify-center">
+        <section className={sectionClass}>
+          <h2 className="text-xl font-semibold mb-2 text-purple-600">
+            Policyholder
+          </h2>
+          <ul className="grid grid-cols-1 gap-4 list-none">
+            <li>{`${policy.holder.first_name} ${policy.holder.last_name}`}</li>
+            <li>
+              <span className="text-gray-500">
+                {policy.holder.document_type}{' '}
+              </span>
 
-      <section className="mb-4">
-        <h2 className="text-xl font-semibold mb-2">Asegurados</h2>
-        <ul className="list-disc pl-4">
-          {policy.insureds.map((insured: PolicyInsured) => (
-            <li key={insured.id}>{insured.name}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="mb-4">
-        <h2 className="text-xl font-semibold mb-2">Coberturas</h2>
-        <ul className="list-disc pl-4">
-          {policy.coverages.map((coverage: PolicyCoverage) => (
-            <li key={coverage.id}>
-              {coverage.name} - Valor Insurado: ${coverage.insured_value}
+              {policy.holder.document_number}
             </li>
-          ))}
-        </ul>
-      </section>
+            <li>{policy.holder.email}</li>
+            <li>
+              <span className="text-gray-500">Phone </span>
+              {policy.holder.phone}
+            </li>
+          </ul>
+        </section>
+
+        <section className={sectionClass}>
+          <h2 className="text-xl font-semibold mb-2 text-purple-600">
+            Insureds
+          </h2>
+          <ul className="grid grid-cols-1 gap-4 list-none">
+            {policy.insureds.map((insured: PolicyInsured) => (
+              <li key={insured.id}>{insured.name}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section className={sectionClass}>
+          <h2 className="text-xl font-semibold mb-2 text-purple-600">
+            Coverages
+          </h2>
+          <ul className="grid grid-cols-1 gap-4 list-none">
+            {policy.coverages.map((coverage: PolicyCoverage) => (
+              <li key={coverage.id}>
+                {coverage.name} - Insured Value:{' '}
+                <span className="font-medium">${coverage.insured_value}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
     </div>
   );
 }
