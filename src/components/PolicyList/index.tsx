@@ -7,6 +7,7 @@ import React from 'react';
 export interface PolicyListProps {
   policies: Policy[];
 }
+
 const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
   return (
     <div>
@@ -17,13 +18,13 @@ const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
               <th scope="col" className="px-6 py-4">
                 Policy Number
               </th>
-              <th scope="col" className="px-4 py-4">
+              <th scope="col" className="px-4 py-4 hidden md:table-cell">
                 Status
               </th>
-              <th scope="col" className="px-6 py-4">
+              <th scope="col" className="px-6 py-4 hidden md:table-cell">
                 Effective From
               </th>
-              <th scope="col" className="px-6 py-4">
+              <th scope="col" className="px-6 py-4 hidden md:table-cell">
                 Effective Until
               </th>
               <th scope="col" className="px-3 py-4"></th>
@@ -43,7 +44,11 @@ const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
                 >
                   {policy.number}
                 </td>
-                <td scope="row" className="px-4 py-3" data-testid={`policy-status-${index} camelcase`}>
+                <td
+                  scope="row"
+                  className="px-4 py-3 hidden md:table-cell"
+                  data-testid={`policy-status-${index} camelcase`}
+                >
                   <div className="flex items-center first-line:uppercase">
                     <span
                       className={`h-2.5 w-2.5 rounded-full me-2 ${getColorStatusClass(policy.status)}`}
@@ -57,7 +62,7 @@ const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
                 </td>
                 <td
                   scope="row"
-                  className="px-6 py-3"
+                  className="px-6 py-3 hidden md:table-cell"
                   data-testid={`policy-effective-from-${index}`}
                   aria-labelledby={`policy-effective-from-${index}`}
                 >
@@ -65,7 +70,7 @@ const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
                 </td>
                 <td
                   scope="row"
-                  className="px-6 py-3"
+                  className="px-6 py-3 hidden md:table-cell"
                   data-testid={`policy-effective-until-${index}`}
                   aria-labelledby={`policy-effective-until-${index}`}
                 >
@@ -93,3 +98,4 @@ const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
 };
 
 export default PolicyList;
+
