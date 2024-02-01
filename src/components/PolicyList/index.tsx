@@ -1,8 +1,9 @@
 import { Policy } from '@/types';
 import { getColorStatusClass, getColorStatusStyle } from '@/utils/colorStatus';
-import { formatInTimeZone } from 'date-fns-tz';
+import formatDateUTC from '@/utils/formatDate';
 import Link from 'next/link';
 import React from 'react';
+import PolicyStatus from './PolicyStatus';
 
 export interface PolicyListProps {
   policies: Policy[];
@@ -11,7 +12,7 @@ export interface PolicyListProps {
 const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
   return (
     <div>
-      <div className="bg-white p-4 rounded-md shadow-md flex flex-col justify-between">
+      <div className="bg-white py-4 rounded-md shadow-md flex flex-col justify-between">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
@@ -46,16 +47,7 @@ const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
                   {policy.number}
                 </td>
                 <td scope="row" className="px-4 py-3 hidden md:table-cell" data-testid={`policy-status-${index}`}>
-                  <div className="flex items-center first-line:uppercase">
-                    <span
-                      className={`h-2.5 w-2.5 rounded-full me-2 ${getColorStatusClass(policy.status)}`}
-                      style={{
-                        backgroundColor: getColorStatusStyle(policy.status),
-                      }}
-                      aria-label={`Policy number {policy.number} with status ${policy.status}`}
-                    ></span>{' '}
-                    {policy.status}
-                  </div>
+                  <PolicyStatus policy={policy} />
                 </td>
                 <td
                   scope="row"
@@ -63,7 +55,7 @@ const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
                   data-testid={`policy-effective-from-${index}`}
                   aria-labelledby={`policy-effective-from-${index}`}
                 >
-                  {formatInTimeZone(new Date(policy.effective_from), 'UTC', 'yyyy-MM-dd')}
+                  {formatDateUTC(policy.effective_from as string)}
                 </td>
                 <td
                   scope="row"
@@ -71,7 +63,7 @@ const PolicyList: React.FC<PolicyListProps> = ({ policies }) => {
                   data-testid={`policy-effective-until-${index}`}
                   aria-labelledby={`policy-effective-until-${index}`}
                 >
-                  {formatInTimeZone(new Date(policy.effective_until), 'UTC', 'yyyy-MM-dd')}
+                  {formatDateUTC(policy.effective_until as string)}
                 </td>
                 <td className="px-3 py-3" scope="row">
                   <Link passHref href={`/policy/${policy.number}`} legacyBehavior>

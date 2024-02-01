@@ -40,7 +40,7 @@ test('renders policy details correctly', async () => {
   await waitFor(() => {});
 
   // Check if policy details are rendered correctly
-  expect(screen.getByText(`Policy Details - ${(mockPolicyData.number as string).toUpperCase()}`)).toBeInTheDocument();
+  expect(screen.getByTestId(`policy-number-details-${mockPolicyData.number}`)).toBeInTheDocument();
   expect(
     screen.getByText(`${mockPolicyData.holder.first_name} ${mockPolicyData.holder.last_name}`)
   ).toBeInTheDocument();
