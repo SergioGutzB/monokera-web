@@ -8,6 +8,7 @@ import { PaginationProps } from '@/types';
 import generatePaginationProps from '@/utils/generatePaginationProps';
 
 import { ITEMS_PER_PAGE } from '@/config';
+import settings from '@/config/settings';
 
 const Policies: React.FC = () => {
   const [policies, setPolicies] = useState([]);
@@ -26,7 +27,7 @@ const Policies: React.FC = () => {
 
   const fetchPolicies = async (query: string) => {
     try {
-      const response = await fetch(`http://localhost:3000/v1/policies/${query}&items=${ITEMS_PER_PAGE}`);
+      const response = await fetch(`${settings.apiUrl}policies/${query}&items=${ITEMS_PER_PAGE}`);
       const { data, paginated } = await response.json();
       setPolicies(data || []);
       if (paginated) {

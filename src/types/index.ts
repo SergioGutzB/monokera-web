@@ -2,6 +2,10 @@ import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import type { ReactNode } from 'react';
 
+export interface Settings {
+  apiUrl: string;
+}
+
 export type NextPageWithLayout = NextPage & {
   getLayout?: () => ReactNode;
 };

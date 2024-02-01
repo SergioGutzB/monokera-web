@@ -1,14 +1,14 @@
 import PolicyStatus from '@/components/PolicyList/PolicyStatus';
 import Progress from '@/components/Progress';
+import settings from '@/config/settings';
 import { Policy, PolicyCoverage, PolicyInsured } from '@/types';
 import calculatePolicyPercentage from '@/utils/calculatePolicyPercentage';
 import formatDateUTC from '@/utils/formatDate';
 import Link from 'next/link';
-import { title } from 'process';
 import React from 'react';
 
 async function getPolicy(policyNumber: string): Promise<Policy | null> {
-  const response = await fetch(`http://localhost:3000/v1/policies/${policyNumber}`).then(res => {
+  const response = await fetch(`${settings.apiUrl}policies/${policyNumber}`).then(res => {
     return res.json();
   });
 
@@ -18,7 +18,7 @@ async function getPolicy(policyNumber: string): Promise<Policy | null> {
   return null;
 }
 
-function TitleSection({ title }: { title: string }): React.FC {
+function TitleSection({ title }: { title: string }) {
   return <h2 className="text-xl font-semibold mb-2 text-text-secondary">{title}</h2>;
 }
 
@@ -63,11 +63,11 @@ async function PolicyDetails({ params }: { params: { number: string } }) {
           <ul className="grid grid-cols-1 gap-4 list-none">
             <li>
               <span className="text-text-dark">Effective from: </span>
-              {formatDateUTC(policy.effective_from)}
+              {formatDateUTC(policy.effective_from as string)}
             </li>
             <li>
               <span className="text-text-dark">Effective until: </span>
-              {formatDateUTC(policy.effective_until)}
+              {formatDateUTC(policy.effective_until as string)}
             </li>
             <li>
               <Progress percentage={calculatePolicyPercentage(policy)} trailColor="bg-active" />

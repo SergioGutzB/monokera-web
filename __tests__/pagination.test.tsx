@@ -27,7 +27,7 @@ test('renders pagination with less than or equal to 5 pages', () => {
 
   // Verificar que los botones de página tengan las clases correctas
   const currentPageButton = screen.getByText(currentPage.toString());
-  expect(currentPageButton).toHaveClass('text-gray-600');
+  expect(currentPageButton).toHaveClass('text-text-dark');
 
   // Verificar que los botones de navegación estén presentes
   const prevButton = screen.getByText('<');
@@ -73,7 +73,7 @@ test('renders pagination with ellipsis', () => {
 
   // Verificar que los botones de página tengan las clases correctas
   const currentPageButton = screen.getByText(currentPage.toString());
-  expect(currentPageButton).toHaveClass('text-gray-600');
+  expect(currentPageButton).toHaveClass('text-text-dark');
 
   // Simular clic en un botón de página
   fireEvent.click(screen.getByText('21'));

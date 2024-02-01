@@ -1,9 +1,10 @@
 import PolicyDetails from '@/app/policy/[number]/page';
+import settings from '@/config/settings';
 import PolicyMock from '@/mocks/policy';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { setupServer } from 'msw/node';
-import { http, HttpResponse } from 'msw';
 import { PolicyCoverage, PolicyInsured } from '@/types';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { HttpResponse, http } from 'msw';
+import { setupServer } from 'msw/node';
 import { useRouter } from 'next/navigation';
 
 const mockPolicyData = PolicyMock(1)[0];
@@ -11,7 +12,7 @@ mockPolicyData.number = 'abc000001';
 
 // Mock server setup
 const server = setupServer(
-  http.get(`http://localhost:3000/v1/policies/${mockPolicyData.number}`, () => {
+  http.get(`${settings.apiUrl}policies/${mockPolicyData.number}`, () => {
     return HttpResponse.json(mockPolicyData);
   })
 );
