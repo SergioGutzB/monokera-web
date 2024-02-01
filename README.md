@@ -63,11 +63,6 @@ npm run test
 - ./**tests**/policyList.test.tsx
 - ./**tests**/policyDetails.test.tsx
 
-
 ## Future Improvements
 
 Here are some potential improvements for the project:
-
-- Implement responsive styling for better adaptability to various screen sizes.
-- Enhance security and flexibility by reading environment variables for configuration.
-
