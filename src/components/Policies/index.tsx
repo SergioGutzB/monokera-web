@@ -47,8 +47,8 @@ const Policies: React.FC = () => {
   return (
     <div className="bg-white rounded-lg my-10">
       <div className="my-10 text-center">
-        <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
-          Policy Hub: <span className="text-purple-600">Simplified Search and Filter</span>
+        <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-text-primary md:text-5xl lg:text-6xl">
+          Policy Hub: <span className="text-primary">Simplified Search and Filter</span>
         </h1>
       </div>
       <PolicySearch onSearch={handleSearch} />

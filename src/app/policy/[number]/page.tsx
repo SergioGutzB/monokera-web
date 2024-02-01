@@ -19,7 +19,7 @@ async function getPolicy(policyNumber: string): Promise<Policy | null> {
 }
 
 function TitleSection({ title }: { title: string }): React.FC {
-  return <h2 className="text-xl font-semibold mb-2 text-gray-400">{title}</h2>;
+  return <h2 className="text-xl font-semibold mb-2 text-text-secondary">{title}</h2>;
 }
 
 async function PolicyDetails({ params }: { params: { number: string } }) {
@@ -30,7 +30,7 @@ async function PolicyDetails({ params }: { params: { number: string } }) {
     return <div>Loading Details...</div>;
   }
 
-  const sectionClass = 'mb-10 border rounded-lg p-4 min-h-[200px]';
+  const sectionClass = 'border rounded-lg p-4 min-h-[200px]';
 
   return (
     <div className="bg-white rounded-lg my-10 px-4 lg:px-20 mx-auto">
@@ -39,7 +39,7 @@ async function PolicyDetails({ params }: { params: { number: string } }) {
           data-testid="back-btn"
           type="button"
           data-modal-show="go-to-back"
-          className="font-medium text-gray-400 hover:text-gray-500"
+          className="font-medium text-text-secondary hover:text-text-dark"
           aria-label={`Go to back`}
           role="link"
         >
@@ -52,29 +52,29 @@ async function PolicyDetails({ params }: { params: { number: string } }) {
         role="heading"
       >
         Policy Details{' '}
-        <span className="text-purple-600" data-testid={`policy-number-details-${policy.number}`}>
+        <span className="text-primary" data-testid={`policy-number-details-${policy.number}`}>
           {policyNumber.toUpperCase()}
         </span>
       </h1>
 
-      <div className="mb-4 grid md:grid-cols-2 grid-cols-1 justify-center gap-8">
+      <div className="mb-4 grid md:grid-cols-2 grid-cols-1 justify-center gap-1 md:gap-8">
         <section className={sectionClass}>
           <TitleSection title="Policy info" />
           <ul className="grid grid-cols-1 gap-4 list-none">
             <li>
-              <span className="text-gray-500">Effective from: </span>
+              <span className="text-text-dark">Effective from: </span>
               {formatDateUTC(policy.effective_from)}
             </li>
             <li>
-              <span className="text-gray-500">Effective until: </span>
+              <span className="text-text-dark">Effective until: </span>
               {formatDateUTC(policy.effective_until)}
             </li>
             <li>
-              <Progress percentage={calculatePolicyPercentage(policy)} trailColor="bg-green-400" />
+              <Progress percentage={calculatePolicyPercentage(policy)} trailColor="bg-active" />
             </li>
             <li>
               <div className="flex gap-4">
-                <span className="text-gray-500">Status:</span>
+                <span className="text-text-dark">Status:</span>
                 <PolicyStatus policy={policy} />
               </div>
             </li>
@@ -85,13 +85,13 @@ async function PolicyDetails({ params }: { params: { number: string } }) {
           <ul className="grid grid-cols-1 gap-4 list-none">
             <li>{`${policy.holder.first_name} ${policy.holder.last_name}`}</li>
             <li>
-              <span className="text-gray-500">{policy.holder.document_type} </span>
+              <span className="text-text-dark">{policy.holder.document_type} </span>
 
               {policy.holder.document_number}
             </li>
             <li>{policy.holder.email}</li>
             <li>
-              <span className="text-gray-500">Phone </span>
+              <span className="text-text-dark">Phone </span>
               {policy.holder.phone}
             </li>
           </ul>

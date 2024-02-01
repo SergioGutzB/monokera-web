@@ -1,5 +1,5 @@
 import { PolicyStatus } from '@/types';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import capitalize from 'lodash/capitalize';
 
 interface PolicySearchProps {
@@ -14,7 +14,7 @@ function index({ onSearch }: PolicySearchProps) {
     status: '',
   });
 
-  const handleInputChange = e => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setSearchParams(prevSearchParams => ({
       ...prevSearchParams,
@@ -24,7 +24,7 @@ function index({ onSearch }: PolicySearchProps) {
 
   const handleSearch = () => {
     const queryString = Object.entries(searchParams)
-      .filter(([, value]) => value !== '') // Filtrar solo los campos no vacíos
+      .filter(([, value]) => value !== '')
       .map(
         ([key, value]) =>
           `${key}=${encodeURIComponent(key === 'effectiveFrom' || key === 'effectiveUntil' ? new Date(value).toISOString() : value)}`
@@ -36,8 +36,8 @@ function index({ onSearch }: PolicySearchProps) {
   const handleClear = () => {
     setSearchParams({
       number: '',
-      effectiveFrom: '',
-      effectiveUntil: '',
+      effective_from: '',
+      effective_until: '',
       status: '',
     });
     onSearch('');
@@ -47,9 +47,8 @@ function index({ onSearch }: PolicySearchProps) {
     <div className="bg-white rounded-lg p-4">
       <div className="md:flex gap-4">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {/* Policy Number */}
           <div>
-            <label htmlFor="policyNumber" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="policyNumber" className="block text-sm font-medium text-text-gray">
               Policy Number
             </label>
             <input
@@ -63,9 +62,8 @@ function index({ onSearch }: PolicySearchProps) {
             />
           </div>
 
-          {/* Effective From */}
           <div>
-            <label htmlFor="effectiveFrom" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="effectiveFrom" className="block text-sm font-medium text-text-gray">
               Effective From
             </label>
             <input
@@ -79,9 +77,8 @@ function index({ onSearch }: PolicySearchProps) {
             />
           </div>
 
-          {/* Effective Until */}
           <div>
-            <label htmlFor="effectiveUntil" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="effectiveUntil" className="block text-sm font-medium text-text-gray">
               Effective Until
             </label>
             <input
@@ -95,9 +92,8 @@ function index({ onSearch }: PolicySearchProps) {
             />
           </div>
 
-          {/* Status */}
           <div>
-            <label htmlFor="status" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="status" className="block text-sm font-medium text-text-gray">
               Status
             </label>
             <select
@@ -123,7 +119,7 @@ function index({ onSearch }: PolicySearchProps) {
           <button
             type="button"
             onClick={handleSearch}
-            className="h-10 p-3 bg-purple-400 text-white rounded-md hover:bg-purple-500 relative self-end"
+            className="h-10 p-3 bg-brand-main text-white rounded-md hover:bg-brand-accent relative self-end"
             aria-label="Search"
           >
             <span style={{ zoom: 0.7 }}>
@@ -146,7 +142,7 @@ function index({ onSearch }: PolicySearchProps) {
           <button
             type="button"
             onClick={handleClear}
-            className="h-10 p-3 bg-gray-200 text-gray-600 rounded-md hover:bg-gray-400 self-end"
+            className="h-10 p-3 bg-text-light text-text-gray rounded-md hover:bg-text-secondary self-end"
             aria-label="Clear"
           >
             <span style={{ zoom: 0.9 }}>

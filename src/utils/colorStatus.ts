@@ -1,19 +1,20 @@
 import { PolicyStatus } from '@/types';
+import styles from '@/styles/main.module.css';
 
 export const getColorStatusClass = (status: string | PolicyStatus): string => {
   const colorStatus: { [x: string]: string } = {
-    active: 'bg-green-500',
-    cancelled: 'bg-red-500',
-    expired: 'bg-gray-500',
+    active: styles.active,
+    cancelled: styles.cancelled,
+    expired: styles.expired,
   };
   return colorStatus[status];
 };
 
 export const getColorStatusStyle = (status: string | PolicyStatus): string => {
   const colorStatus: { [x: string]: string } = {
-    active: 'green',
-    cancelled: 'red',
-    expired: 'gray',
+    active: styles.active,
+    cancelled: styles.cancelled,
+    expired: styles.expired,
   };
   return colorStatus[status];
 };

@@ -1,0 +1,12 @@
+/* main.module.css */
+.active {
+  @apply bg-active;
+}
+
+.cancelled {
+  @apply bg-cancelled;
+}
+
+.expired {
+  @apply bg-expired;
+}

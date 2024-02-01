@@ -9,11 +9,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        // 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        // 'gradient-conic':
-        //   'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
       screens: {
         sm: '500px',
         md: '800px',
@@ -21,14 +16,20 @@ const config: Config = {
         xl: '1536px',
       },
       colors: {
-        violet: '#5F24C6',
+        primary: '#7c3aed',
+        light: '#ddd6fe',
         brand: {
-          accent: '#5F24C6',
-          main: '#4916A2',
+          accent: '#c084fc',
+          main: '#d8b4fe',
         },
+        active: '#4ade80',
+        cancelled: '#ef4444',
+        expired: '#6b7280',
         text: {
           primary: '#0C0F19',
-          secondary: '#FFFFFF',
+          secondary: '#9ca3af',
+          dark: '#4b5563',
+          light: '#e5e7eb',
         },
         background: {
           primary: '#FFFFFF',

@@ -7,8 +7,8 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Monokera Test',
-  description: 'Monokera Test Frontend',
+  title: 'Monokera | Policy Hug',
+  description: 'Monokera | Policy Hub: Simplified Search and Filter',
 };
 
 export default function RootLayout({ children }: ChildrenProps) {
