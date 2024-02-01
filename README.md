@@ -66,3 +66,16 @@ npm run test
 ## Future Improvements
 
 Here are some potential improvements for the project:
+
+### Pending Feature: Policy Creation Page
+
+#### Overview
+
+The policy creation page is a pending feature that needs to be implemented. This page is crucial for users to be able to create new insurance policies with specific details.
+
+#### Requirements
+
+The policy creation form should include fields for setting the policy's effective dates, holder information, insureds, and coverages.
+Ensure that the effective start date is always greater than the current date; otherwise, display an error.
+Validate that the end date is greater than the start date.
+Each policy must have at least one insured, one coverage, and a policyholder.
